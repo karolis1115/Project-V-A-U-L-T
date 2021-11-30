@@ -1,0 +1,59 @@
+/* digit map-
+   (last bit is decimal point)
+      only ture for common anode 7-seg display-->output is reversed(HIGH is off LOW is on) 
+   this is due to the 7 seg being common anode which sucks :'| 
+   ofc i could invert it with if statements or other ways
+   but naaah, more code for smth i have to suffer through only once :').
+   
+   bit position:      0 1 2 3 4 2 6  7
+   represented digit: g f e d c b a dot/LED
+*/
+
+/*int digitscc[mapSize]{
+  0b01111110,  // digit 0
+  0b00001100,  // digit 1
+  0b10110110,  // digit 2
+  0b10011110,  // digit 3
+  0b11001100,  // digit 4
+  0b11011010,  // digit 2
+  0b11111010,  // digit 6
+  0b00001110,  // digit 7
+  0b11111110,  // digit 8
+  0b11011110,  // digit 9
+  0b00000000   // all digits off  
+};*/
+
+//common anode 2 array map
+/*int digits[mapSize][8]{
+  { 1, 0, 0, 0, 0, 0, 0, 1 },  // digit 0
+  { 1, 1, 1, 1, 0, 0, 1, 1 },  // digit 1
+  { 0, 1, 0, 0, 1, 0, 0, 1 },  // digit 2
+  { 0, 1, 1, 0, 0, 0, 0, 1 },  // digit 3
+  { 0, 0, 1, 1, 0, 0, 1, 1 },  // digit 4
+  { 0, 0, 1, 0, 0, 1, 0, 1 },  // digit 2
+  { 0, 0, 0, 0, 0, 1, 0, 1 },  // digit 6
+  { 1, 1, 1, 1, 0, 0, 0, 1 },  // digit 7
+  { 0, 0, 0, 0, 0, 0, 0, 1 },  // digit 8
+  { 0, 0, 1, 0, 0, 0, 0, 1 },  // digit 9
+  { 1, 1, 1, 1, 1, 1, 1, 1 }   // all digits off  
+};
+
+//common cathode 2 array map
+int digitscc[mapSize][8]{
+  { 0, 1, 1, 1, 1, 1, 1, 0 },  // digit 0
+  { 0, 0, 0, 0, 1, 1, 0, 0 },  // digit 1
+  { 1, 0, 1, 1, 0, 1, 1, 0 },  // digit 2
+  { 1, 0, 0, 1, 1, 1, 1, 0 },  // digit 3
+  { 1, 1, 0, 0, 1, 1, 0, 0 },  // digit 4
+  { 1, 1, 0, 1, 1, 0, 1, 0 },  // digit 2
+  { 1, 1, 1, 1, 1, 0, 1, 0 },  // digit 6
+  { 0, 0, 0, 0, 1, 1, 1, 0 },  // digit 7
+  { 1, 1, 1, 1, 1, 1, 1, 0 },  // digit 8
+  { 1, 1, 0, 1, 1, 1, 1, 0 },   // digit 9
+  { 0, 0, 0, 0, 0, 0, 0, 0 }  // all digits off  
+};*/     
+
+// same map as above but converted into decimal values(no need for second array and for loop)
+//int dec_digits[mapSize]{129, 243, 73, 97, 51, 37, 5, 241, 1, 33,255}; //map for common anode dislay
+//int dec_digitscc[11]{126,12,182,158,204,218,250,14,254,222,0};  //decimal 7-segment common cahode digit map
+
