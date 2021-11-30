@@ -1,11 +1,14 @@
 #include "global.h"
-// void ReadAcc7_seg(int &x, int &y, int &z){
-// analogRead(accY);
-// analogRead(accZ);
-// x=map(analogRead(accX),320,300,9,0);
-//}
 
-/*Copied code lol
+void ReadAcc7_seg(int &x, int &y, int &z)
+{
+   x = analogRead(accX);
+   y = analogRead(accY);
+   z = analogRead(accZ);
+}
+
+/*
+Copied code lol
 
 const int xpin = A0; // x-axis of the accelerometer
 const int ypin = A1; // y-axis

@@ -9,8 +9,8 @@
 // Pin Definitions:
 #define servo 6
 #define speaker 5
-#define redLed 0
-#define greenLed 1
+#define redLed 0   // will change if we use dot in 7-seg display
+#define greenLed 1 // same as above
 
 // rotary encoder
 #define DT 2  // Interrupt pin
@@ -31,5 +31,7 @@
 #define accX A1
 #define accY A2
 #define accZ A3
+
+extern volatile int count;
 
 #endif
