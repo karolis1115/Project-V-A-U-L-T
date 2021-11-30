@@ -1,9 +1,8 @@
-#include "global.h"
-#include "header.h"
+#include "global.h" //arduino.h and other libraries are included in global.h
+#include "header.h" //header flie for funtion prototypes
 
 // variables
 #define time1 300
-
 unsigned long Previousmillis = 0;
 
 void setup()
@@ -26,11 +25,12 @@ void loop()
   int min = 0;
   int max = 10;
 
-  if ((unsigned long)(Currentmillis - Previousmillis)>=time1) {
+  if ((unsigned long)(Currentmillis - Previousmillis) >= time1)
+  {
     generateRandomNumber(min, max, num1, num2, num3, num4);
     Previousmillis = Currentmillis;
   }
-  //encoderRead(num1,num2,num3);
-  //ReadAcc7_seg(num1, num2, num3);
-  displayNumber(num1,num2,num3,num4);
+  // encoderRead(num1,num2,num3);
+  // ReadAcc7_seg(num1, num2, num3);
+  displayNumber(num1, num2, num3, num4);
 }

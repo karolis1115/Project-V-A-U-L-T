@@ -7,7 +7,6 @@
 //#include <neotimer.h>
 
 // Pin Definitions:
-// misc
 #define servo 6
 #define speaker 5
 #define redLed 0
