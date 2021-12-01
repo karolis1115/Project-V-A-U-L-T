@@ -2,7 +2,7 @@
 
 // common cathode 7-segment display map
 // int digitMap[11]{ 126, 12, 182, 158, 204, 218, 250, 14, 254, 222, 0 };
-int digitMap[12]{
+byte digitMap[12]{
     0b01111110, // digit 0
     0b00001100, // digit 1
     0b10110110, // digit 2

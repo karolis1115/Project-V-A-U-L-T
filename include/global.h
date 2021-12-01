@@ -32,6 +32,5 @@
 #define accY A2
 #define accZ A3
 
-extern volatile int count;
 
 #endif

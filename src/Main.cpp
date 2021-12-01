@@ -18,8 +18,8 @@ void setup()
   pinMode(accZ, INPUT);
 
   // interrupts for Rotary enoder
-  attachInterrupt(digitalPinToInterrupt(DT), isrA, FALLING);
-  attachInterrupt(digitalPinToInterrupt(CLK), isrB, FALLING);
+  attachInterrupt(digitalPinToInterrupt(DT), isrA, RISING);
+  attachInterrupt(digitalPinToInterrupt(CLK), isrB, RISING);
 }
 
 void loop()
@@ -29,12 +29,12 @@ void loop()
   int min = 0;
   int max = 10;
 
-  // if ((unsigned long)(Currentmillis - Previousmillis) >= time1)
-  //{
-  // generateRandomNumber(min, max, num1, num2, num3, num4);
-  // Previousmillis = Currentmillis;
-  //}
-  readEncoder();
+   if ((unsigned long)(Currentmillis - Previousmillis) >= time1)
+  {
+   generateRandomNumber(min, max, num1, num2, num3, num4);
+   Previousmillis = Currentmillis;
+  }
+  //readEncoder(num1);
   // ReadAcc7_seg(num1, num2, num3);
-  displayNumber(count, num2, num3, num4);
+  displayNumber(num1, num2, num3, num4);
 }

@@ -1,11 +1,15 @@
+
+
 #include "global.h"
+
+//also stolen code :3
 int protectedCount = 0;
 int previousCount = 0;
 volatile int count = 0;
 #define readA bitRead(PIND, DT)  // faster than digitalRead()
 #define readB bitRead(PIND, CLK) // faster than digitalRead()
 
-void readEncoder()
+void readEncoder(int &digit)
 {
     noInterrupts();
     protectedCount = count;
@@ -13,7 +17,7 @@ void readEncoder()
 
     if (protectedCount != previousCount)
     {
-        Serial.println(protectedCount);
+        digit = protectedCount;
     }
     previousCount = protectedCount;
 }
