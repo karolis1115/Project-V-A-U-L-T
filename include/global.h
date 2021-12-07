@@ -10,7 +10,7 @@
 #include <Arduino.h> //the main Arduino library
 #include <EEPROM.h>  //the library used for eeprom read/write
 #include <wire.h> //the library used for interfacing wit i2c devices (this library is usually used along side other libraries)
-#include <LiquidCrystal_I2C.h> //library for i2c LCD display
+#include <hd44780.h> //library for i2c LCD display
 #include <GY521.h> //Library for The GY521 IMU(gyro,accelerometer,temp sensor)
 #include <Rotary.h>// a great library to drive a rotary encoder, Takes away all of the headace.
 //#include <neotimer.h> //non blockig timer library (may or may not be used)
