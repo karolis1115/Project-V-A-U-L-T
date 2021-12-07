@@ -24,11 +24,12 @@ void loop()
   unsigned long Currentmillis = millis();
   int min = 0;
   int max = 10;
-
+  //basically does the same as the delay() function but doesn't stop executing everything else.
    if ((unsigned long)(Currentmillis - Previousmillis) >= time1)
   {
-   generateRandomNumber(min, max, num1, num2, num3, num4);
+   //generateRandomNumber(min, max, num1, num2, num3, num4);
    Previousmillis = Currentmillis;
   }
-  displayNumber(num1, num2, num3, num4);
+  countDigits(num1);
+  displayNumber(num1, num1, num1, num1);
 }
