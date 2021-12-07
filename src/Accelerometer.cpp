@@ -9,6 +9,7 @@ void ReadAcc7_seg(int &x, int &y, int &z)
 
 /*
 Copied code lol
+Stolen for sure
 
 const int xpin = A0; // x-axis of the accelerometer
 const int ypin = A1; // y-axis
