@@ -36,6 +36,5 @@ void loop()
    Previousmillis = Currentmillis;
   }
   //readEncoder(num1);
-  //ReadAcc7_seg(num1, num2, num3);
   displayNumber(num1, num2, num3, num4);
 }
