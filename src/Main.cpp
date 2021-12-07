@@ -7,19 +7,15 @@ unsigned long Previousmillis = 0;
 
 void setup()
 {
-  for (int i = 2; i <= 13; i++)
+  Serial.begin(9600);
+  for (int i = 4; i <= 13; i++)
   {
     pinMode(i, OUTPUT);
   }
-  pinMode(DT, INPUT_PULLUP);
-  pinMode(CLK, INPUT_PULLUP);
-  pinMode(accX, INPUT);
-  pinMode(accY, INPUT);
-  pinMode(accZ, INPUT);
-
+  
   // interrupts for Rotary enoder
-  attachInterrupt(digitalPinToInterrupt(DT), isrA, RISING);
-  attachInterrupt(digitalPinToInterrupt(CLK), isrB, RISING);
+  attachInterrupt(0, encoderChange, CHANGE);
+  attachInterrupt(1, encoderChange, CHANGE);
 }
 
 void loop()
@@ -29,12 +25,10 @@ void loop()
   int min = 0;
   int max = 10;
 
-
    if ((unsigned long)(Currentmillis - Previousmillis) >= time1)
   {
    generateRandomNumber(min, max, num1, num2, num3, num4);
    Previousmillis = Currentmillis;
   }
-  //readEncoder(num1);
   displayNumber(num1, num2, num3, num4);
 }

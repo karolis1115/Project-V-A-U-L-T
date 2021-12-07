@@ -1,47 +1,26 @@
+/*Rotary encoder handler for arduino. v1.1
 
+Copyright 2011 Ben Buxton. Licenced under the GNU GPL Version 3. Contact: bb@cactii.net
 
+A typical mechanical rotary encoder emits a two bit gray code on 3 output pins. Every step in the output (often accompanied by a physical 'click') generates a specific sequence of output codes on the pins.
+
+There are 3 pins used for the rotary encoding - one common and two 'bit' pins.
+*/
 #include "global.h"
+int count = 0;
+Rotary rotary = Rotary(B,A);
 
-//also stolen code :3
-//find the original creditor(thogh good chance we will replace it with our own code)
-int protectedCount = 0;
-int previousCount = 0;
-volatile int count = 0;
-#define readA bitRead(PIND, DT)  // faster than digitalRead()
-#define readB bitRead(PIND, CLK) // faster than digitalRead()
-
-void readEncoder(int &digit)
+void encoderChange()
 {
-    noInterrupts();
-    protectedCount = count;
-    interrupts();
-
-    if (protectedCount != previousCount)
-    {
-        digit = protectedCount;
-    }
-    previousCount = protectedCount;
-}
-
-void isrA()
-{
-    if (readB != readA)
+    unsigned char result = rotary.process();
+    if (result == DIR_CW)
     {
         count++;
+        Serial.println(count);
     }
-    else
+    else if (result == DIR_CCW)
     {
         count--;
-    }
-}
-void isrB()
-{
-    if (readA == readB)
-    {
-        count++;
-    }
-    else
-    {
-        count--;
+        Serial.println(count);
     }
 }

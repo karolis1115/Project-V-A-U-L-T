@@ -9,6 +9,7 @@
 #include <wire.h> //the library used for interfacing wit i2c devices (this library is usually used along side other libraries)
 #include <LiquidCrystal_I2C.h> //library for i2c LCD display
 #include <GY521.h> //Library for The GY521 IMU(gyro,accelerometer,temp sensor)
+#include <Rotary.h>
 //#include <neotimer.h> //non blockig timer library (may or may not be used)
 
 // Pin Definitions:
@@ -18,8 +19,8 @@
 #define greenLed 1 // same as above
 
 // rotary encoder
-#define DT 2  // Interrupt pin
-#define CLK 3 // Interrupt pin
+#define A 2  // Interrupt pin
+#define B 3 // Interrupt pin
 
 // Shift register
 #define latchClock 8
@@ -31,10 +32,5 @@
 #define display2En 12
 #define display3En 11
 #define display4En 10
-
-// 3 input accelerometer
-#define accX A1
-#define accY A2
-#define accZ A3
 
 #endif
