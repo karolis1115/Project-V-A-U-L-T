@@ -26,6 +26,7 @@ void displayNumber(int display1, int display2, int display3, int display4)
   digitalWrite(display3En, HIGH);
   digitalWrite(display4En, HIGH);
 
+  //pulse the latchClokc pin
   digitalWrite(latchClock, HIGH);
   digitalWrite(latchClock, LOW);
   delay(5);
@@ -37,6 +38,7 @@ void displayNumber(int display1, int display2, int display3, int display4)
   digitalWrite(display3En, HIGH);
   digitalWrite(display4En, HIGH);
 
+  //pulse the latchClokc pin
   digitalWrite(latchClock, HIGH);
   digitalWrite(latchClock, LOW);
   delay(5);
@@ -48,6 +50,7 @@ void displayNumber(int display1, int display2, int display3, int display4)
   digitalWrite(display3En, LOW);
   digitalWrite(display4En, HIGH);
 
+  //pulse the latchClokc pin
   digitalWrite(latchClock, HIGH);
   digitalWrite(latchClock, LOW);
   delay(5);
@@ -59,6 +62,7 @@ void displayNumber(int display1, int display2, int display3, int display4)
   digitalWrite(display3En, HIGH);
   digitalWrite(display4En, LOW);
 
+  //pulse the latchClokc pin
   digitalWrite(latchClock, HIGH);
   digitalWrite(latchClock, LOW);
   delay(5);

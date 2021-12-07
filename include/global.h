@@ -1,14 +1,19 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
+//Global variables and stuff that should be included by all of the .cpp files
+
 // libraires
-#include <Arduino.h>
-#include <EEPROM.h>
-//#include <neotimer.h>
+#include <Arduino.h> //the main Arduino library
+#include <EEPROM.h>  //the library used for eeprom read/write
+#include <wire.h> //the library used for interfacing wit i2c devices (this library is usually used along side other libraries)
+#include <LiquidCrystal_I2C.h> //library for i2c LCD display
+#include <GY521.h> //Library for The GY521 IMU(gyro,accelerometer,temp sensor)
+//#include <neotimer.h> //non blockig timer library (may or may not be used)
 
 // Pin Definitions:
 #define servo 6
-#define speaker 5
+#define speaker 5  
 #define redLed 0   // will change if we use dot in 7-seg display
 #define greenLed 1 // same as above
 
@@ -31,6 +36,5 @@
 #define accX A1
 #define accY A2
 #define accZ A3
-
 
 #endif

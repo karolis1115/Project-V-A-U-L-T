@@ -1,4 +1,4 @@
-#include "global.h" //arduino.h and other libraries are included in global.h
+#include "global.h" //global header file for global variables and so on (arduino.h and other libraries are included in global.h)
 #include "header.h" //header flie for funtion prototypes
 
 // variables
@@ -29,12 +29,13 @@ void loop()
   int min = 0;
   int max = 10;
 
+
    if ((unsigned long)(Currentmillis - Previousmillis) >= time1)
   {
    generateRandomNumber(min, max, num1, num2, num3, num4);
    Previousmillis = Currentmillis;
   }
   //readEncoder(num1);
-  // ReadAcc7_seg(num1, num2, num3);
+  //ReadAcc7_seg(num1, num2, num3);
   displayNumber(num1, num2, num3, num4);
 }

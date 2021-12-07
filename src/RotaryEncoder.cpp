@@ -3,6 +3,7 @@
 #include "global.h"
 
 //also stolen code :3
+//find the original creditor(thogh good chance we will replace it with our own code)
 int protectedCount = 0;
 int previousCount = 0;
 volatile int count = 0;
