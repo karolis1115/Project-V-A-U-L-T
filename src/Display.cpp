@@ -26,7 +26,7 @@ void displayNumber(int display1, int display2, int display3, int display4)
   digitalWrite(display3En, HIGH);
   digitalWrite(display4En, HIGH);
 
-  //pulse the latchClokc pin
+  // pulse the latchClokc pin
   digitalWrite(latchClock, HIGH);
   digitalWrite(latchClock, LOW);
   delay(5);
@@ -38,7 +38,7 @@ void displayNumber(int display1, int display2, int display3, int display4)
   digitalWrite(display3En, HIGH);
   digitalWrite(display4En, HIGH);
 
-  //pulse the latchClokc pin
+  // pulse the latchClokc pin
   digitalWrite(latchClock, HIGH);
   digitalWrite(latchClock, LOW);
   delay(5);
@@ -50,7 +50,7 @@ void displayNumber(int display1, int display2, int display3, int display4)
   digitalWrite(display3En, LOW);
   digitalWrite(display4En, HIGH);
 
-  //pulse the latchClokc pin
+  // pulse the latchClokc pin
   digitalWrite(latchClock, HIGH);
   digitalWrite(latchClock, LOW);
   delay(5);
@@ -62,8 +62,60 @@ void displayNumber(int display1, int display2, int display3, int display4)
   digitalWrite(display3En, HIGH);
   digitalWrite(display4En, LOW);
 
-  //pulse the latchClokc pin
+  // pulse the latchClokc pin
   digitalWrite(latchClock, HIGH);
   digitalWrite(latchClock, LOW);
   delay(5);
+}
+
+int display = 1;
+int released = 1;
+// A function that changes which display to change the number on when pressing the encoder shaft
+void selectDisplay(int &number1, int &number2, int &number3, int &number4)
+{
+  // checks if the button has been pressed
+  if (digitalRead(rotaryButton) == 0)
+  {
+    // checks to see if the button has been released previously
+    if (released == 1)
+    {
+      {
+        //bounds for the displays
+        if (display < 4)
+        {
+          display++;
+        }
+        else
+          display = 1;
+      }
+      released = 0;
+      //at each button press set the count back to 0 so you wouldn't start off at the last inputed digit
+      count=0;
+    }
+  }
+
+  switch (display)
+  {
+  case 1:
+    number1 = count;
+    break;
+
+  case 2:
+    number2 = count;
+    break;
+
+  case 3:
+    number3 = count;
+    break;
+
+  case 4:
+    number4 = count;
+    break;
+  }
+
+  // if button is released set variable released to 1
+  if (digitalRead(rotaryButton) == 1)
+  {
+    released = 1;
+  }
 }
