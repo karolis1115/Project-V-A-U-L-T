@@ -16,8 +16,8 @@
 // Pin Definitions:
 #define servo 6
 #define speaker 5
-#define redLed 0
-#define greenLed 1
+#define redLed 13
+#define greenLed 12
 #define rotaryButton 4
 
 // rotary encoder
@@ -29,12 +29,26 @@
 #define registerClock 7
 #define data 9
 
-// 7-seg digit common anodes || cathodes
+//BCD
+#define latchEable A1 // Added as a precaution incase this pin ends up being needed to drive the displays correctly, but most likely it will be driven low
+
+
+// 7-seg digit common anodes || cathodes (to be replaced with only 7 segment point digit.)
 #define display1En 13
 #define display2En 12
 #define display3En 11
 #define display4En 10
+#define displayPoint 11
 
+//GY-521, LCD, and other I2c devices
+ #define SDA A4
+ #define SCL A5
+
+ //Receiver 
+ #define ReceiverPin A0
+
+ //Door sensor
+ #define doorSensor 10
 //variables (to use global variables "extern" needs to be written before the datatype)
 extern Servo lock;
 extern int count;
