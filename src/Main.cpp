@@ -22,8 +22,8 @@ void setup()
   pinMode(rotaryButton, INPUT_PULLUP);
 
   // interrupts for Rotary enoder
-  attachInterrupt(0, encoderChange, CHANGE);
-  attachInterrupt(1, encoderChange, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(2), encoderChange, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(3), encoderChange, CHANGE);
 }
 int num1, num2, num3, num4;
 int dec;
@@ -33,9 +33,12 @@ void loop()
   // unsigned long Currentmillis = millis();
   // if ((unsigned long)(Currentmillis - Previousmillis) >= time1)
   //{
+    
+  //Generates a random number for each digit
   // generateRandomNumber(num1, num2, num3, num4);
   // Previousmillis = Currentmillis;
   //}
+  
   countDigits(dec);
   rotaryServo(dec);
   rotaryBuzz(dec);
