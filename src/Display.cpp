@@ -1,68 +1,61 @@
 #include "global.h"
 
-// common cathode 7-segment display map
-// int digitMap[11]{ 126, 12, 182, 158, 204, 218, 250, 14, 254, 222, 0 };
-byte digitMap[12]{
-    0b01111110, // digit 0
-    0b00001100, // digit 1
-    0b10110110, // digit 2
-    0b10011110, // digit 3
-    0b11001100, // digit 4
-    0b11011010, // digit 2
-    0b11111010, // digit 6
-    0b00001110, // digit 7
-    0b11111110, // digit 8
-    0b11011110, // digit 9
-    0b00000000, // all digits off
-    0b00000001  // dot or led on
+// this is the map for the numbers
+byte numberMap[11]{
+    0b0000, // 0
+    0b0001, // 1
+    0b0010, // 2
+    0b0011, // 3
+    0b0100, // 4
+    0b0101, // 5
+    0b0110, // 6
+    0b0111, // 7
+    0b1000, // 8
+    0b1001, // 9
+    0b1010  // Display off
 };
 
-void displayNumber(int display1, int display2, int display3, int display4)
+// this is the map for the display selection
+byte displaySelectMap[4]{
+    0b0001, // display 1
+    0b0010, // display 2
+    0b0100, // display 3
+    0b1000  // display 4
+};
+// this is the variable that stores the merged maps
+byte fullMap;
+
+void displayNumber(int num1, int num2, int num3, int num4)
 {
+
   // First display
-  shiftOut(data, registerClock, MSBFIRST, digitMap[display1]);
-  digitalWrite(display1En, LOW);
-  digitalWrite(display2En, HIGH);
-  digitalWrite(display3En, HIGH);
-  digitalWrite(display4En, HIGH);
+  fullMap = displaySelectMap[0] << 4 | numberMap[num1];
+  shiftOut(data, registerClock, MSBFIRST, fullMap);
 
-  // pulse the latchClokc pin
   digitalWrite(latchClock, HIGH);
   digitalWrite(latchClock, LOW);
   delay(5);
 
-  // Second display
-  shiftOut(data, registerClock, MSBFIRST, digitMap[display2]);
-  digitalWrite(display1En, HIGH);
-  digitalWrite(display2En, LOW);
-  digitalWrite(display3En, HIGH);
-  digitalWrite(display4En, HIGH);
+  // Second digit
+  fullMap = displaySelectMap[1] << 4 | numberMap[num2];
+  shiftOut(data, registerClock, MSBFIRST, fullMap);
 
-  // pulse the latchClokc pin
   digitalWrite(latchClock, HIGH);
   digitalWrite(latchClock, LOW);
   delay(5);
 
-  // Third display
-  shiftOut(data, registerClock, MSBFIRST, digitMap[display3]);
-  digitalWrite(display1En, HIGH);
-  digitalWrite(display2En, HIGH);
-  digitalWrite(display3En, LOW);
-  digitalWrite(display4En, HIGH);
+  // Third digit
+  fullMap = displaySelectMap[2] << 4 | numberMap[num3];
+  shiftOut(data, registerClock, MSBFIRST, fullMap);
 
-  // pulse the latchClokc pin
   digitalWrite(latchClock, HIGH);
   digitalWrite(latchClock, LOW);
   delay(5);
 
-  // Fourth display
-  shiftOut(data, registerClock, MSBFIRST, digitMap[display4]);
-  digitalWrite(display1En, HIGH);
-  digitalWrite(display2En, HIGH);
-  digitalWrite(display3En, HIGH);
-  digitalWrite(display4En, LOW);
+  // Fourth digit
+  fullMap = displaySelectMap[3] << 4 | numberMap[num4];
+  shiftOut(data, registerClock, MSBFIRST, fullMap);
 
-  // pulse the latchClokc pin
   digitalWrite(latchClock, HIGH);
   digitalWrite(latchClock, LOW);
   delay(5);
@@ -80,7 +73,7 @@ void selectDisplay(int &number1, int &number2, int &number3, int &number4)
     if (released == 1)
     {
       {
-        //bounds for the displays
+        // bounds for the displays
         if (display < 4)
         {
           display++;
@@ -89,8 +82,8 @@ void selectDisplay(int &number1, int &number2, int &number3, int &number4)
           display = 1;
       }
       released = 0;
-      //at each button press set the count back to 0 so you wouldn't start off at the last inputed digit
-      count=0;
+      // at each button press set the count back to 0 so you wouldn't start off at the last inputed digit
+      count = 0;
     }
   }
 
