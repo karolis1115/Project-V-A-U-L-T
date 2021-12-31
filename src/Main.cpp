@@ -43,5 +43,5 @@ void loop()
   rotaryServo(dec);
   rotaryBuzz(dec);
   selectDisplay(num1, num2, num3, num4);
-  displayNumber(num1, num2, num3, num4);
+  displayNumber(num1,num2,num3,num4);
 }

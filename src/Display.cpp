@@ -15,13 +15,22 @@ byte numberMap[11]{
     0b1010  // Display off
 };
 
-// this is the map for the display selection
-byte displaySelectMap[4]{
+// this is the map for the display selection (for common anode and is used for the final pcb)
+/*byte displaySelectMap[4]{
     0b0001, // display 1
     0b0010, // display 2
     0b0100, // display 3
     0b1000  // display 4
+};*/
+
+//this is for a common cathode display which is used in the 1st protorype
+byte displaySelectMap[4]{
+    0b1110, // display 1
+    0b1101, // display 2
+    0b1011, // display 3
+    0b0111  // display 4
 };
+
 // this is the variable that stores the merged maps
 byte fullMap;
 
