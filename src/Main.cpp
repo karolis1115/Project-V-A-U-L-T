@@ -4,19 +4,21 @@
 // variables
 #define time1 300
 unsigned long Previousmillis = 0;
-int password = 0000; // password of the vault
-int choice;   // Choice made by the user to use rng or own code
-int PWinput;    // password input by the user
-int attempts =1;  // 3 attempts allowwed for the user
 
 void setup()
 {
   // attach the servo that's named lock to pin 9(servo)
   lock.attach(servo);
 
-  // generates a seed from the given value that is used in the random() function
-  randomSeed(analogRead(A5));
+  // IMU sensor setup code
+  Wire.begin();
+  IMU.setAccelSensitivity(0);
+  // Sensor callibration data
+  IMU.axe = 0;
+  IMU.aye = 0;
+  IMU.aze = 0;
 
+  
   Serial.begin(9600);
 
   for (int i = 5; i <= 13; i++)
@@ -33,19 +35,19 @@ int num1, num2, num3, num4;
 int dec;
 void loop()
 {
-  // basically does the same as the delay() function but doesn't stop executing everything else.
+  // basically does the same as the delay() function but doesn't stop executing everything else aka (Non-blocking).
   // unsigned long Currentmillis = millis();
   // if ((unsigned long)(Currentmillis - Previousmillis) >= time1)
   //{
-    
-  //Generates a random number for each digit
-  // generateRandomNumber(num1, num2, num3, num4);
-  // Previousmillis = Currentmillis;
-  //}
-  
+
+  // Generates a random number for each digit
+  //  generateRandomNumber(num1, num2, num3, num4);
+  //  Previousmillis = Currentmillis;
+  // }
+
   countDigits(dec);
   rotaryServo(dec);
   rotaryBuzz(dec);
   selectDisplay(num1, num2, num3, num4);
-  displayNumber(num1,num2,num3,num4);
+  displayNumber(num1, num2, num3, num4);
 }

@@ -2,6 +2,8 @@
 
 int generateRandomNumber(int &num1, int &num2, int &num3, int &num4)
 {
+  // generates a seed from the given value that is used in the random() function
+  randomSeed(millis());
   int min = 0;
   int max = 10;
 
