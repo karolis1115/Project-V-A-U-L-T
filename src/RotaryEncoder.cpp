@@ -8,12 +8,16 @@ void encoderChange()
     if (result == DIR_CW)
     {
         count++;
-        //Serial.println(count);
+        //a quick way to test the red and green led's
+        digitalWrite(greenLed,HIGH);
+        digitalWrite(redLed,LOW);
     }
     else if (result == DIR_CCW)
     {
         count--;
-        //Serial.println(count);
+        //a quick way to test the red and green led's
+        digitalWrite(greenLed,LOW);
+        digitalWrite(redLed,HIGH);
     }
 }
 void countDigits(int &digit){
