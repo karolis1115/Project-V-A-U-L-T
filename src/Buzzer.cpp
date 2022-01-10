@@ -5,7 +5,6 @@ void rotaryBuzz(int val){
 }
 
 void unlockTone(){
-    
 }
 void lockTone(){}
 void errorTone(){}
