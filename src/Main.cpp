@@ -31,54 +31,8 @@ void setup()
 }
 int num1, num2, num3, num4;
 int dec;
-void loop(){
-    if (password == 0000) {
-        printf("Do you want to make a password(0) or generate one(1)\n");
-        printf("Insert a 0 or 1\n");
-        scanf("%d", &choice);
-        while ((choice > 1) || (choice < 0)) {
-            printf("Wrong input, try again!\n");
-            printf("Enter your choice:\n");
-            scanf("%d", &choice);
-        }
-        if (choice == 0) {
-            printf("Insert a password\n");
-            scanf("%d", &password);
-        } else if (choice == 1) {
-            printf("Your generated code is: %d\n", generateRandomNumber());
-        } else {
-            printf("Incorrect choice\n");
-            scanf("%d", &password);
-        }
-    }
-        printf("Insert password:\n");
-        scanf("%d", &input);
-
-        if (input == generateRandomNumber()) {
-            printf("correct password\n");
-            printf("LED turns green + buzzer\n");
-        } else if (input == password) {
-            printf("Correct password\n");
-            printf("LED turns green + buzzer\n");
-        } else {
-            while ((input != password) && (input != generateRandomNumber()) && attempts <= 2) {
-                printf("Incorrect password, Try again:\n");
-                scanf("%d", &input);
-                attempts++;
-            }
-            if (input == generateRandomNumber()) {
-                printf("correct password\n");
-                printf("LED turns green + buzzer\n");
-            } else if (input == password) {
-                printf("Correct password\n");
-                printf("LED turns green + buzzer\n");
-            }
-        }
-
-    
-        return 0;
-    }
-
+void loop()
+{
   // basically does the same as the delay() function but doesn't stop executing everything else.
   // unsigned long Currentmillis = millis();
   // if ((unsigned long)(Currentmillis - Previousmillis) >= time1)
@@ -94,6 +48,4 @@ void loop(){
   rotaryBuzz(dec);
   selectDisplay(num1, num2, num3, num4);
   displayNumber(num1,num2,num3,num4);
-
-  
 }
