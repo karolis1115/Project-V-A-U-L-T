@@ -2,13 +2,9 @@
 #include "header.h" //header flie for funtion prototypes
 
 // variables
-#define time1 300
 unsigned long Previousmillis = 0;
-int choice;       // Choice made by the user to use rng or own code
-int PWinput;      // password input by the user
-int attempts = 1; // 3 attempts allowwed for the user
+int selectedDisplay; // Chooses which display to edit the value in
 int tnum1 = 0, tnum2 = 0, tnum3 = 0, tnum4 = 0;
-int dec;
 int firstDigit = 0;
 bool executed = false;
 int incorrect = 0;
@@ -41,32 +37,31 @@ void setup()
 void loop()
 {
   // local loop variables
-  int num1, num2, num3, num4;
+  int num1=0, num2=0, num3=0, num4=0;
   bool correct = false;
   bool entered = false;
   // if the code hasn't been set yet aka all 0 then ask to set a code both led's will be on
   if (EEPROM.read(0) == 0 && EEPROM.read(1) == 0 && EEPROM.read(2) == 0 && EEPROM.read(3) == 0)
   {
-
-    while (choice < 4)
+    unlockVault();
+    while (selectedDisplay < 4)
     {
-
       displayNumber(num1, num2, num3, num4);
-      selectDisplay(num1, num2, num3, num4, choice);
+      selectDisplay(num1, num2, num3, num4, selectedDisplay);
       digitalWrite(13, HIGH);
       digitalWrite(12, HIGH);
-      if (choice < 3)
+      if (selectedDisplay < 3)
       {
         firstDigit = num1;
       }
-    }// write changed to EEPROM
+    } // write changed to EEPROM
     EEPROM.write(0, firstDigit);
     EEPROM.write(1, num2);
     EEPROM.write(2, num3);
     EEPROM.write(3, num4);
   }
 
-  //keep looping while the code isn't correct
+  // keep looping while the code isn't correct
   while (!correct)
   {
     executed = false;
@@ -74,30 +69,37 @@ void loop()
     analogWrite(speaker, 0);
     digitalWrite(greenLed, LOW);
     digitalWrite(bcdBlanking, HIGH);
-    while (!entered && choice < 4)
+    while (!entered && selectedDisplay < 4)
     {
       displayNumber(tnum1, tnum2, tnum3, tnum4);
-      selectDisplay(tnum1, tnum2, tnum3, tnum4, choice);
+      selectDisplay(tnum1, tnum2, tnum3, tnum4, selectedDisplay);
 
-      if (choice < 3)
+      if (selectedDisplay < 3)
       {
         firstDigit = tnum1;
       }
+      else if(selectedDisplay >3 && correct ==false){
+        incorrect++;
+      }
     }
 
-    //if code correct set bool to true
+    // if code correct set bool to true
     if (firstDigit == EEPROM.read(0) && tnum2 == EEPROM.read(1) && tnum3 == EEPROM.read(2) && tnum4 == EEPROM.read(3))
     {
       correct = true;
     }
 
-    //else set bool to false and execute required code
+    // else set bool to false and execute required code
     else
     {
       correct = false;
-      choice = 0;
+      selectedDisplay = 0;
       entered = false;
-      incorrect++;
+      codeIncorrect();
+      tnum1 = 0;
+      tnum2 = 0;
+      tnum3 = 0;
+      tnum4 = 0;
       if (incorrect == 3)
       {
         digitalWrite(redLed, HIGH);
@@ -136,14 +138,14 @@ void loop()
       num2 = 0;
       num3 = 0;
       num4 = 0;
-      choice = 0;
-      while (choice < 4)
+      selectedDisplay = 0;
+      while (selectedDisplay < 4)
       {
         displayNumber(num1, num2, num3, num4);
-        selectDisplay(num1, num2, num3, num4, choice);
+        selectDisplay(num1, num2, num3, num4, selectedDisplay);
         digitalWrite(13, HIGH);
         digitalWrite(12, HIGH);
-        if (choice < 3)
+        if (selectedDisplay < 3)
         {
           firstDigit = num1;
         }
@@ -153,12 +155,17 @@ void loop()
       EEPROM.write(1, num2);
       EEPROM.write(2, num3);
       EEPROM.write(3, num4);
-      // set required variables and lock the safe
+
       correct = true;
       unlockTone();
       incorrect = 0;
+      firstDigit = 0;
+      tnum1= 0;
+      tnum2 = 0;
+      tnum3 = 0;
+      tnum4 = 0;
       digitalWrite(redLed, LOW);
-      digitalWrite(bcdBlanking,LOW);
+      digitalWrite(bcdBlanking, LOW);
     }
 
     // checks to see if the door sensor has been trigered is so it locks the vault and resets the led's and display
@@ -166,6 +173,7 @@ void loop()
     {
       lockTone();
       correct = false;
+      firstDigit = 0;
       tnum1 = 0;
       tnum2 = 0;
       tnum3 = 0;

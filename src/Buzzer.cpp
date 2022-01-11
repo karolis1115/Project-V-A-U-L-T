@@ -19,6 +19,10 @@ void lockTone()
    tone(speaker,500,250);
 }
 
+void codeIncorrect(){
+   tone(speaker,500,500);
+}
+
 void errorTone()
 {
    tone(speaker,1000);

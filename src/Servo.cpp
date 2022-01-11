@@ -8,5 +8,5 @@ void unlockVault(){
 }
 
 void lockVault(){
-        lock.write(180);
+        lock.write(90);
 }

@@ -16,4 +16,5 @@ void unlockVault();
 void lockVault();
 void errorTone();
 void lockTone();
+void codeIncorrect();
 #endif
