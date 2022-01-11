@@ -1,7 +1,7 @@
 #include "global.h"
 
 // this is the map for the numbers
-byte numberMap[11]{
+byte numberMap[10]{
     0b0000, // 0
     0b0001, // 1
     0b0010, // 2
@@ -12,7 +12,6 @@ byte numberMap[11]{
     0b0111, // 7
     0b1000, // 8
     0b1001, // 9
-    0b1010  // Display off
 };
 
 // this is the map for the display selection (for common anode and is used for the final pcb)
@@ -69,12 +68,12 @@ void displayNumber(int num1, int num2, int num3, int num4)
   digitalWrite(latchClock, LOW);
   delay(5);
 }
-
-int display = 1;
+int display =1;
 int released = 1;
 // A function that changes which display to change the number on when pressing the encoder shaft
-void selectDisplay(int &number1, int &number2, int &number3, int &number4)
+void selectDisplay(int &number1, int &number2, int &number3, int &number4, int& choice)
 {
+  
   // checks if the button has been pressed
   if (digitalRead(rotaryButton) == 0)
   {
@@ -82,6 +81,7 @@ void selectDisplay(int &number1, int &number2, int &number3, int &number4)
     if (released == 1)
     {
       {
+        choice++;
         // bounds for the displays
         if (display < 4)
         {
@@ -92,7 +92,7 @@ void selectDisplay(int &number1, int &number2, int &number3, int &number4)
       }
       released = 0;
       // at each button press set the count back to 0 so you wouldn't start off at the last inputed digit
-      count = 0;
+      count =0;
     }
   }
 

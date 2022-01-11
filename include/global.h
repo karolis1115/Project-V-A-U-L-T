@@ -46,5 +46,6 @@
 extern Servo lock;
 extern GY521 IMU;
 extern int count;
+extern int display;
 extern RH_ASK radio;
 #endif
