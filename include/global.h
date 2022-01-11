@@ -22,6 +22,8 @@
 #define redLed 13
 #define greenLed 12
 #define rotaryButton 4
+#define resetButton 11
+#define bcdBlanking A1
 
 // rotary encoder
 #define A 2 // Interrupt pin

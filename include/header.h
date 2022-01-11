@@ -14,4 +14,6 @@ void getTransmission(char Trans);
 void unlockTone();
 void unlockVault();
 void lockVault();
+void errorTone();
+void lockTone();
 #endif

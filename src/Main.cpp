@@ -10,7 +10,8 @@ int attempts = 1; // 3 attempts allowwed for the user
 int tnum1 = 0, tnum2 = 0, tnum3 = 0, tnum4 = 0;
 int dec;
 int firstDigit = 0;
-
+bool executed =false;
+ int incorrect =0;
 void setup()
 {
   // attach the servo that's named lock to pin 9(servo)
@@ -27,6 +28,9 @@ void setup()
   }
   pinMode(rotaryButton, INPUT_PULLUP);
   pinMode(doorSensor, INPUT_PULLUP);
+  pinMode(resetButton,INPUT_PULLUP);
+  pinMode(bcdBlanking,OUTPUT);
+  digitalWrite(bcdBlanking,HIGH);
 
   // interrupts for Rotary enoder
   attachInterrupt(digitalPinToInterrupt(2), encoderChange, CHANGE);
@@ -35,16 +39,15 @@ void setup()
 
 void loop()
 {
-  bool correct = false;
-  bool done = false;
-  bool entered = false;
   int num1, num2, num3, num4;
+  bool correct = false;
+  bool entered = false;
   if (EEPROM.read(0) == 0 && EEPROM.read(1) == 0 && EEPROM.read(2) == 0 && EEPROM.read(3) == 0)
   {
-    int firstDigit = 0;
     // generateRandomNumber(num1, num2, num3, num4);
     while (choice < 4)
     {
+
       displayNumber(num1, num2, num3, num4);
       selectDisplay(num1, num2, num3, num4, choice);
       digitalWrite(13, HIGH);
@@ -58,17 +61,20 @@ void loop()
     EEPROM.write(1, num2);
     EEPROM.write(2, num3);
     EEPROM.write(3, num4);
-    done = true;
   }
 
   while (!correct)
   {
+    executed = false;
+    lockVault();
+    analogWrite(speaker,0);
+    digitalWrite(greenLed, LOW);
+    digitalWrite(bcdBlanking,HIGH);
     while (!entered && choice < 4)
     {
-      digitalWrite(redLed, LOW);
-      digitalWrite(greenLed, LOW);
       displayNumber(tnum1, tnum2, tnum3, tnum4);
       selectDisplay(tnum1, tnum2, tnum3, tnum4, choice);
+
       if (choice < 3)
       {
         firstDigit = tnum1;
@@ -83,35 +89,74 @@ void loop()
     else
     {
       correct = false;
-      digitalWrite(redLed, HIGH);
       choice = 0;
       entered = false;
+      incorrect++;
+      if(incorrect ==3){
+        digitalWrite(redLed,HIGH);
+        digitalWrite(bcdBlanking,LOW);
+        errorTone();
+        delay(2000);
+        incorrect=0;
+        digitalWrite(bcdBlanking,HIGH);
+        digitalWrite(redLed,LOW);
+        noTone(speaker);
+      }
     }
   }
   while (correct)
   {
+    if(executed == false){
     digitalWrite(greenLed, HIGH);
+    digitalWrite(redLed,LOW);
+    digitalWrite(bcdBlanking,LOW);
     unlockTone();
     unlockVault();
+    executed = true;
+    }
     displayNumber(firstDigit, tnum2, tnum3, tnum4);
 
-    if (digitalRead(doorSensor) == LOW)
+    if (digitalRead(resetButton) == LOW)
     {
-      correct = false;
+      digitalWrite(bcdBlanking,HIGH);
+      int firstDigit = 0;
       firstDigit = 0;
+      num2 = 0;
+      num3 = 0;
+      num4 = 0;
+      choice =0;
+      while (choice < 4)
+      {
+        displayNumber(num1, num2, num3, num4);
+        selectDisplay(num1, num2, num3, num4, choice);
+        digitalWrite(13, HIGH);
+        digitalWrite(12, HIGH);
+        if (choice < 3)
+        {
+          firstDigit = num1;
+        }
+      }
+      EEPROM.write(0, firstDigit);
+      EEPROM.write(1, num2);
+      EEPROM.write(2, num3);
+      EEPROM.write(3, num4);
+      correct=false;
+      firstDigit = 0;
+      tnum1 = 0;
+      tnum2 = 0;
+      tnum3 = 0;
+      tnum4 = 0;
+    }
+
+    // checks to see if the door sensor has been trigered is so it locks the vault and resets the led's and display
+    if (digitalRead(rotaryButton) == HIGH &&digitalRead(doorSensor)==LOW)
+    {
+      lockTone();
+      correct = false;
+      tnum1 = 0;
       tnum2 = 0;
       tnum3 = 0;
       tnum4 = 0;
     }
   }
 }
-
-// basically does the same as the delay() function but doesn't stop executing everything else.
-// unsigned long Currentmillis = millis();
-// if ((unsigned long)(Currentmillis - Previousmillis) >= time1)
-//{
-
-// Generates a random number for each digit
-//  generateRandomNumber(num1, num2, num3, num4);
-//  Previousmillis = Currentmillis;
-// }
