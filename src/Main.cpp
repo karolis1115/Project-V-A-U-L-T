@@ -106,6 +106,7 @@ void loop()
   }
   while (correct)
   {
+    incorrect=0;
     if(executed == false){
     digitalWrite(greenLed, HIGH);
     digitalWrite(redLed,LOW);
@@ -146,6 +147,8 @@ void loop()
       tnum2 = 0;
       tnum3 = 0;
       tnum4 = 0;
+      lockTone();
+      incorrect=0;
     }
 
     // checks to see if the door sensor has been trigered is so it locks the vault and resets the led's and display
@@ -157,6 +160,7 @@ void loop()
       tnum2 = 0;
       tnum3 = 0;
       tnum4 = 0;
+      incorrect=0;
     }
   }
 }

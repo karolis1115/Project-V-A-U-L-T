@@ -100,18 +100,42 @@ void selectDisplay(int &number1, int &number2, int &number3, int &number4, int& 
   {
   case 1:
     number1 = count;
+    if(count >9){
+        count=0;
+    }
+    if (count <0){
+        count =9;
+    }
     break;
 
   case 2:
     number2 = count;
+    if(count >9){
+        count=0;
+    }
+    if (count <0){
+        count =9;
+    }
     break;
 
   case 3:
     number3 = count;
+    if(count >9){
+        count=0;
+    }
+    if (count <0){
+        count =9;
+    }
     break;
 
   case 4:
     number4 = count;
+    if(count >9){
+        count=0;
+    }
+    if (count <0){
+        count =9;
+    }
     break;
   }
 

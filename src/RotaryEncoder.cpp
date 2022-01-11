@@ -16,12 +16,3 @@ void encoderChange()
         //Serial.println(count);
     }
 }
-void countDigits(int &digit){
-    if(count >9){
-        count=0;
-    }
-    if (count <0){
-        count =9;
-    }
-    digit=count;
-}
